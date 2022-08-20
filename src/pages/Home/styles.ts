@@ -3,31 +3,38 @@ import styled from 'styled-components';
 export const HomeContainer = styled.main`
 	display: flex;
 	flex-direction: column;
+`;
 
-	.hero {
-		display: flex;
-		justify-content: space-between;
-		gap: 8rem;
+export const HeroContainer = styled.section`
+	display: flex;
+	justify-content: space-between;
+	gap: 5rem;
 
-		padding-block: 8rem;
-		position: relative;
+	padding-block: 8rem;
+	position: relative;
 
-		.text-container > h1 {
+	img {
+		width: 40%;
+	}
+
+	.text-container {
+		h1 {
 			font-size: 4.8rem;
 			padding-bottom: 1rem;
-			color: #272221;
+			color: ${(props) => props.theme.title};
 		}
-		.text-container > p {
-			font-size: 2.1rem;
+
+		p {
+			font-size: 2.2rem;
 			padding-bottom: 5rem;
-			color: #403937;
+			color: ${(props) => props.theme.subtitle};
 		}
 
 		ul {
 			display: flex;
 			flex-flow: row wrap;
 			justify-content: space-between;
-			color: #574f4d;
+			color: ${(props) => props.theme.text};
 			width: 100%;
 
 			> li {
@@ -37,39 +44,38 @@ export const HomeContainer = styled.main`
 
 			> li span:first-child {
 				display: inline-flex;
-				padding: 1rem;
+				padding: 8px;
 				border-radius: 50%;
-				background-color: red;
-				margin-right: 1rem;
+				margin-right: 12px;
 				svg {
-					color: #fafafa;
+					color: ${(props) => props.theme.background};
 				}
 			}
 
 			> li:nth-child(1) span:first-child {
-				background: #c47f17;
+				background: ${(props) => props.theme['yellow-dark']};
 			}
 			> li:nth-child(2) span:first-child {
-				background: #574f4d;
+				background: ${(props) => props.theme.text};
 			}
 			> li:nth-child(3) span:first-child {
-				background: #dbac2c;
+				background: ${(props) => props.theme.yellow};
 			}
 			> li:nth-child(4) span:first-child {
-				background: #8047f8;
+				background: ${(props) => props.theme.purple};
 			}
 		}
 	}
+`;
 
-	.coffees {
-		h2 {
-			padding-bottom: 3rem;
-		}
-		.coffeeListing {
-			display: flex;
-			flex-flow: row wrap;
-			align-items: center;
-			gap: 3rem;
-		}
+export const CoffeeListContainer = styled.section`
+	h2 {
+		padding-bottom: 3rem;
+	}
+	.listing-area {
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		gap: 3.2rem;
 	}
 `;

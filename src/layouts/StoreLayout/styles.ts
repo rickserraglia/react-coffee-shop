@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import heroBg from '../../assets/hero-bg.png';
 
 export const StoreLayoutContainer = styled.div`
-	max-width: 118rem;
-	height: calc(100vh - 16rem);
+	max-width: 116rem;
 	margin: auto;
 	padding: 1.6rem 4rem;
 	border-radius: 8px;

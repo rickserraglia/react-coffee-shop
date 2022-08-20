@@ -1,14 +1,14 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
-import { CheckoutSuccessContainer } from './styles';
+import { CheckoutSuccessContainer, GradientBoxContainer } from './styles';
 import CheckoutDoneIllustration from '../../../assets/checkout-done.svg';
 
 export const CheckoutSuccess = () => {
 	return (
 		<CheckoutSuccessContainer>
-			<div>
+			<div className="text-area">
 				<h3>Uhu! Pedido Confirmado</h3>
 				<p>Agora é só aguardar que logo o café chegará até você</p>
-				<div className="box">
+				<GradientBoxContainer>
 					<div>
 						<MapPin size={32} />
 						<div>
@@ -30,7 +30,7 @@ export const CheckoutSuccess = () => {
 							<p>Cartão de Crédito</p>
 						</div>
 					</div>
-				</div>
+				</GradientBoxContainer>
 			</div>
 			<div className="imageBox">
 				<img src={CheckoutDoneIllustration} alt="" />
