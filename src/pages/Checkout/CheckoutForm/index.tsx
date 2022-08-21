@@ -44,7 +44,7 @@ export const CheckoutForm = () => {
 		resolver: zodResolver(checkoutFormSchema)
 	});
 
-	const submitCheckoutForm = (data: any) => {
+	const submitCheckoutForm = (data: CheckoutFormInputsType) => {
 		// console.log(data);
 		// actions before reset
 		reset();

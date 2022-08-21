@@ -1,10 +1,23 @@
 import { Trash } from 'phosphor-react';
 import { useContext } from 'react';
+
 import { CartContext } from '../../../../../context/CartContext';
 import { priceFormatter } from '../../../../../utils/formatter';
 import { CartItemContainer } from './styles';
 
-export const CartItem = ({ item }: any) => {
+export interface CartItems {
+	item: {
+		id: number;
+		name: string;
+		description: string;
+		image: string;
+		category: string[];
+		price: number;
+		quantity: number;
+	};
+}
+
+export const CartItem = ({ item }: CartItems) => {
 	const { updateCart } = useContext(CartContext);
 	// eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
 	const handleUpdateItemQuantity = (e: any) => {

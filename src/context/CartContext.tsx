@@ -2,7 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 
 import { coffeesList } from '../assets/coffeesList';
 
-interface CartItems {
+export interface CartItems {
 	id: number;
 	name: string;
 	description: string;
@@ -44,6 +44,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
 	const resetCart = () => {
 		setCartItems([]);
+		localStorage.setItem('@react-coffee:cart-Items-1.0.0', '[]');
 	};
 
 	const updateCart = (
