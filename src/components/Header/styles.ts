@@ -11,9 +11,8 @@ export const HeaderContainer = styled.header`
 		align-items: center;
 		justify-content: space-between;
 
-		max-width: 116rem;
+		max-width: 112rem;
 		margin: auto;
-		padding: 1.6rem 4rem;
 
 		width: 100%;
 		padding-block: 2rem;

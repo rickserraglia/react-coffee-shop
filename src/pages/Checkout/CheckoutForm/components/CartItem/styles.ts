@@ -13,8 +13,12 @@ export const CartItemContainer = styled.div`
 		padding-inline: 10px;
 		flex: 1;
 		display: flex;
+		justify-content: space-between;
 		flex-direction: column;
 		color: ${(props) => props.theme.subtitle};
+		> p {
+			padding-block: 2px;
+		}
 		> div {
 			display: flex;
 			width: 100%;
@@ -29,7 +33,7 @@ export const CartItemContainer = styled.div`
 				border-radius: 6px;
 				font-size: 1.2rem;
 				text-transform: uppercase;
-				padding: 1rem;
+				padding: 0.6rem 1rem;
 				svg {
 					color: ${(props) => props.theme.purple};
 				}
@@ -42,7 +46,7 @@ export const CartItemContainer = styled.div`
 				background: ${(props) => props.theme.button};
 				border: none;
 				border-radius: 6px;
-				padding: 1rem;
+				padding: 0.6rem 1rem;
 				max-width: 55px;
 				font-size: 1.6rem;
 				&:focus {
@@ -54,5 +58,6 @@ export const CartItemContainer = styled.div`
 	> span {
 		font-weight: bold;
 		padding-left: 20px;
+		padding-block: 2px;
 	}
 `;

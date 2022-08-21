@@ -10,24 +10,30 @@ export const CheckoutSuccess = () => {
 				<p>Agora é só aguardar que logo o café chegará até você</p>
 				<GradientBoxContainer>
 					<div>
-						<MapPin size={32} />
+						<MapPin size={32} weight="fill" />
 						<div>
-							<p>Entrega em ...</p>
-							<p>Ribeirão Preto - SP</p>
+							<p>
+								Entrega em <strong>Rua Xxxxx Xxxxxx, 999</strong>
+							</p>
+							<p>Bairro - Ribeirão Preto - SP</p>
 						</div>
 					</div>
 					<div>
-						<Timer size={32} />
+						<Timer size={32} weight="fill" />
 						<div>
 							<p>Previsão de entrega</p>
-							<p>20 min - 30 min</p>
+							<p>
+								<strong>20 min - 30 min</strong>
+							</p>
 						</div>
 					</div>
 					<div>
-						<CurrencyDollar size={32} />
+						<CurrencyDollar size={32} weight="fill" />
 						<div>
 							<p>Pagamento na entrega</p>
-							<p>Cartão de Crédito</p>
+							<p>
+								<strong>Cartão de Crédito</strong>
+							</p>
 						</div>
 					</div>
 				</GradientBoxContainer>

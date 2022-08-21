@@ -7,7 +7,7 @@ export const CoffeeItemContainer = styled.div`
 	text-align: center;
 	background: ${(props) => props.theme.card};
 	padding: 0 2.4rem 2rem;
-	max-width: 24rem;
+	width: 25.6rem;
 	border-radius: 6px 36px;
 	position: relative;
 

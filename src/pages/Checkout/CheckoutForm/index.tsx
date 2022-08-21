@@ -1,24 +1,14 @@
-import {
-	Bank,
-	CreditCard,
-	CurrencyDollar,
-	MapPinLine,
-	Money
-} from 'phosphor-react';
-import { useContext } from 'react';
-import { CartContext } from '../../../context/CartContext';
-import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-	CheckoutFormContainer,
-	CheckoutFormInputs,
-	CheckoutItemsResume,
-	PaymentType,
-	PaymentTypeButton
-} from './styles';
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from 'phosphor-react';
+import { useContext } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import * as z from 'zod';
+
+import { CartContext } from '../../../context/CartContext';
 import { priceFormatter } from '../../../utils/formatter';
 import { CartItem } from './components/CartItem';
+import { CheckoutFormContainer, CheckoutFormInputs, CheckoutItemsResume, PaymentType, PaymentTypeButton } from './styles';
 
 const checkoutFormSchema = z.object({
 	cep: z.string(),
@@ -34,7 +24,8 @@ const checkoutFormSchema = z.object({
 type CheckoutFormInputsType = z.infer<typeof checkoutFormSchema>;
 
 export const CheckoutForm = () => {
-	const { cartItems } = useContext(CartContext);
+	const { cartItems, resetCart } = useContext(CartContext);
+	const navigate = useNavigate();
 
 	const subTotal = cartItems.reduce((acc, item) => {
 		return item.price * item.quantity + acc;
@@ -54,9 +45,11 @@ export const CheckoutForm = () => {
 	});
 
 	const submitCheckoutForm = (data: any) => {
-		console.log(data);
+		// console.log(data);
 		// actions before reset
 		reset();
+		resetCart();
+		navigate('done');
 	};
 
 	return (
@@ -131,20 +124,24 @@ export const CheckoutForm = () => {
 					{cartItems.map((item) => {
 						return <CartItem key={item.id} item={item} />;
 					})}
-					<div className="pricing-area">
-						<div className="pricing">
-							<p>Subtotal</p> <span>{priceFormatter.format(subTotal)}</span>
+					{cartItems.length === 0 ? (
+						<p>O seu carrinho está vazio</p>
+					) : (
+						<div className="pricing-area">
+							<div className="pricing">
+								<p>Subtotal</p> <span>{priceFormatter.format(subTotal)}</span>
+							</div>
+							<div className="pricing">
+								<p>Entrega</p> <span>{priceFormatter.format(deliveryFee)}</span>
+							</div>
+							<div className="pricing" data-type="total">
+								<p>Total</p> <span>{priceFormatter.format(total)}</span>
+							</div>
+							<button type="submit" disabled={isSubmitting}>
+								Confirmar Pedido
+							</button>
 						</div>
-						<div className="pricing">
-							<p>Entrega</p> <span>{priceFormatter.format(deliveryFee)}</span>
-						</div>
-						<div className="pricing" data-type="total">
-							<p>Total</p> <span>{priceFormatter.format(total)}</span>
-						</div>
-						<button type="submit" disabled={isSubmitting}>
-							Confirmar Pedido
-						</button>
-					</div>
+					)}
 				</div>
 			</CheckoutItemsResume>
 		</CheckoutFormContainer>

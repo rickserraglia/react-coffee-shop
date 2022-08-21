@@ -35,6 +35,11 @@ export const CheckoutSuccessContainer = styled.div`
 `;
 
 export const GradientBoxContainer = styled.div`
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+
 	margin-top: 4rem;
 	padding: 4rem;
 
@@ -54,11 +59,29 @@ export const GradientBoxContainer = styled.div`
 	border-radius: 1rem 4rem;
 	border: 1px solid transparent;
 
-	flex: 1;
-
 	> div {
 		display: flex;
-		gap: 1rem;
+		gap: 12px;
 		align-items: center;
+
+		> div > p {
+			font-size: 16px !important;
+		}
+
+		> svg:first-child {
+			border-radius: 50%;
+			padding: 8px;
+			color: ${(props) => props.theme.white};
+		}
+	}
+
+	> div:nth-child(1) > svg {
+		background-color: ${(props) => props.theme.purple};
+	}
+	> div:nth-child(2) > svg {
+		background-color: ${(props) => props.theme.yellow};
+	}
+	> div:nth-child(3) > svg {
+		background-color: ${(props) => props.theme['yellow-dark']};
 	}
 `;

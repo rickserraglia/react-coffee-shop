@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+
 import { coffeesList } from '../assets/coffeesList';
 
 interface CartItems {
@@ -14,6 +15,7 @@ interface CartItems {
 interface CartContextType {
 	cartItems: CartItems[];
 	updateCart: (id: number, qty: number, dir?: boolean) => void;
+	resetCart: () => void;
 }
 
 interface CartProviderProps {
@@ -24,6 +26,25 @@ export const CartContext = createContext({} as CartContextType);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
 	const [cartItems, setCartItems] = useState<CartItems[]>([]);
+
+	useEffect(() => {
+		const storedStateAsJSON = localStorage.getItem(
+			'@react-coffee:cart-Items-1.0.0'
+		);
+
+		if (storedStateAsJSON) {
+			const localStorageJSON = JSON.parse(storedStateAsJSON);
+			if (localStorageJSON.length) {
+				setCartItems(localStorageJSON);
+			}
+		} else {
+			localStorage.setItem('@react-coffee:cart-Items-1.0.0', '[]');
+		}
+	}, []);
+
+	const resetCart = () => {
+		setCartItems([]);
+	};
 
 	const updateCart = (
 		newItemId: number,
@@ -39,6 +60,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 				const removedFromCart = cartItems.filter(
 					(item) => newItemId !== item.id
 				);
+				localStorage.setItem(
+					'@react-coffee:cart-Items-1.0.0',
+					JSON.stringify(removedFromCart)
+				);
 				setCartItems(removedFromCart);
 			} else {
 				const updatedQuantity = cartItems.map((item) => {
@@ -51,11 +76,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 					}
 					return item;
 				});
+				localStorage.setItem(
+					'@react-coffee:cart-Items-1.0.0',
+					JSON.stringify(updatedQuantity)
+				);
 				setCartItems(updatedQuantity);
 			}
 		} else {
 			const newItem = coffeesList.find((coffee) => coffee.id === newItemId);
 			if (newItem) {
+				localStorage.setItem(
+					'@react-coffee:cart-Items-1.0.0',
+					JSON.stringify([...cartItems, { ...newItem, quantity }])
+				);
 				setCartItems((state) => [...state, { ...newItem, quantity }]);
 			}
 		}
@@ -63,7 +96,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
 	return (
 		// eslint-disable-next-line react-perf/jsx-no-new-object-as-prop
-		<CartContext.Provider value={{ cartItems, updateCart }}>
+		<CartContext.Provider value={{ cartItems, updateCart, resetCart }}>
 			{children}
 		</CartContext.Provider>
 	);
